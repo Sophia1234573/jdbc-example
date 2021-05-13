@@ -1,7 +1,6 @@
 package ua.goit.jdbc.service;
 
 import ua.goit.jdbc.dao.DataAccessObject;
-import ua.goit.jdbc.dao.LocationDao;
 import ua.goit.jdbc.dao.model.Location;
 import ua.goit.jdbc.dto.LocationDto;
 
@@ -14,7 +13,8 @@ public class LocationService {
 
     public LocationDto create(LocationDto locationDto) {
         Location location = LocationConverter.toLocation(locationDto);
-        Location savedLocation = repository.create(location);
+        repository.create(location);
+        Location savedLocation = repository.findById(location.getId());
         return LocationConverter.fromLocation(savedLocation);
     }
 }
